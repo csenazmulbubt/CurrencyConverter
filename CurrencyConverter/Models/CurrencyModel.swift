@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct CurrencyModel {
-    let disclaimer: String?
-    let license: String?
-    let timestamp: Int?
-    let base: String?
-    let rates: [String: Double]?
+struct CurrencyModel: Codable {
+    let disclaimer: String
+    let license: String
+    let timestamp: Int
+    let base: String
+    let rates: [String: Double]
 }
