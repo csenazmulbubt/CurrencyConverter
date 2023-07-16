@@ -230,6 +230,7 @@ public extension CodableFiles {
 
             // Decode data to Decodable object.
             let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
             let decodedObject = try decoder.decode(T.self, from: jsonData)
 
             return decodedObject

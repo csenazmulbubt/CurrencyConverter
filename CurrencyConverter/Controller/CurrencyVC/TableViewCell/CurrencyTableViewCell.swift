@@ -14,6 +14,7 @@ class CurrencyTableViewCell: UITableViewCell {
     @IBOutlet weak var rateLabelValue: UILabel!
     @IBOutlet weak var resultLabelValue: UILabel!
     
+    static let cellIdentifier = "CurrencyTableViewCell"
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct CurrencyConvertModel {
+    let from: String
+    let to: String
+    let rate: Double
+    let result: Double
+}

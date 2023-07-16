@@ -46,7 +46,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="2ax-0M-DOs" firstAttribute="leading" secondItem="Hlj-ca-yek" secondAttribute="leading" constant="8" id="40M-ro-ZV2"/>
                                                     <constraint firstItem="pE4-T3-Zx9" firstAttribute="centerY" secondItem="Hlj-ca-yek" secondAttribute="centerY" id="Fps-Ph-OCV"/>
@@ -74,7 +74,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="tZv-v7-Lgy" secondAttribute="trailing" id="BKS-oh-gcy"/>
                                                     <constraint firstItem="mC8-fu-bmF" firstAttribute="leading" secondItem="CTL-H0-lzQ" secondAttribute="leading" constant="8" id="EyH-PK-5rA"/>
@@ -102,7 +102,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="VRq-Mr-1rp" firstAttribute="leading" secondItem="5TO-2R-cOi" secondAttribute="trailing" constant="8" id="ESC-oo-Ctt"/>
                                                     <constraint firstAttribute="trailing" secondItem="VRq-Mr-1rp" secondAttribute="trailing" id="YyP-Xa-wym"/>
@@ -112,9 +112,10 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBrownColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="cI4-wg-5bl" secondAttribute="bottom" id="KIV-M0-vTp"/>
                                     <constraint firstItem="cI4-wg-5bl" firstAttribute="leading" secondItem="V4v-e6-NQa" secondAttribute="leading" id="KbS-ad-6H0"/>
@@ -138,7 +139,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="V4v-e6-NQa" secondAttribute="bottom" id="7ft-ng-FR4"/>
                             <constraint firstAttribute="trailing" secondItem="hYX-cH-pGJ" secondAttribute="trailing" id="Jd6-gD-o14"/>
@@ -152,6 +153,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="OgK-G6-qky" secondAttribute="trailing" id="1MF-Mp-7Mr"/>
                     <constraint firstAttribute="bottom" secondItem="OgK-G6-qky" secondAttribute="bottom" id="2So-rQ-mGU"/>
@@ -160,6 +162,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="fromCurrencyLabelValue" destination="pE4-T3-Zx9" id="rk9-1a-qHN"/>
                 <outlet property="rateLabelValue" destination="5TO-2R-cOi" id="G83-2Z-gHr"/>
@@ -170,12 +173,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemIndigoColor">
             <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

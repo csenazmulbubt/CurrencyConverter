@@ -11,10 +11,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CurrencyConvertView" customModule="CurrencyConverter" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicatiorView" destination="g1m-Nk-vp9" id="zH7-6C-LFr"/>
+                <outlet property="currencyInfoTableView" destination="neU-WL-pST" id="hLL-mL-y2j"/>
                 <outlet property="currencyInputContainerView" destination="QcR-pm-6Nd" id="AO7-ly-4OB"/>
                 <outlet property="currencyInputTextField" destination="gxs-JE-4Yg" id="DHw-L8-DbI"/>
                 <outlet property="currencyPickerView" destination="yLW-7Q-8bN" id="yNS-wc-963"/>
-                <outlet property="currencyPickerViewBottomConstraint" destination="TlQ-dv-Zzr" id="Way-Be-qPK"/>
+                <outlet property="currencyPickerViewBottomConstraint" destination="tOu-s9-yHu" id="dt9-PO-fZT"/>
                 <outlet property="selectCurrencyCV" destination="fZi-FS-dAd" id="W6O-4l-Aab"/>
                 <outlet property="selectCurrencyLabel" destination="rg4-O3-sJr" id="uQp-Jo-Y4m"/>
             </connections>
@@ -81,6 +83,11 @@
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="g1m-Nk-vp9">
+                                    <rect key="frame" x="0.0" y="0.0" width="68" height="44"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </activityIndicatorView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15a-Ct-VE4">
                                     <rect key="frame" x="76" y="0.0" width="44" height="44"/>
                                     <color key="backgroundColor" systemColor="systemGrayColor"/>
@@ -97,12 +104,16 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="15a-Ct-VE4" secondAttribute="bottom" id="2VT-Cp-7d5"/>
+                                <constraint firstAttribute="bottom" secondItem="g1m-Nk-vp9" secondAttribute="bottom" id="7En-io-jlf"/>
                                 <constraint firstAttribute="trailing" secondItem="15a-Ct-VE4" secondAttribute="trailing" id="9VG-QF-zc9"/>
                                 <constraint firstItem="15a-Ct-VE4" firstAttribute="top" secondItem="fZi-FS-dAd" secondAttribute="top" id="INT-Gu-Ic5"/>
                                 <constraint firstItem="rg4-O3-sJr" firstAttribute="top" secondItem="fZi-FS-dAd" secondAttribute="top" id="Kkf-qb-I5C"/>
                                 <constraint firstItem="rg4-O3-sJr" firstAttribute="leading" secondItem="fZi-FS-dAd" secondAttribute="leading" id="MM2-ZY-ZE6"/>
+                                <constraint firstItem="g1m-Nk-vp9" firstAttribute="leading" secondItem="fZi-FS-dAd" secondAttribute="leading" id="MqE-Sr-8uC"/>
+                                <constraint firstItem="g1m-Nk-vp9" firstAttribute="top" secondItem="fZi-FS-dAd" secondAttribute="top" id="N41-Gm-hAO"/>
                                 <constraint firstAttribute="width" constant="120" id="RCP-Qq-g6D"/>
                                 <constraint firstAttribute="height" constant="44" id="aoV-0r-Ow5"/>
+                                <constraint firstItem="g1m-Nk-vp9" firstAttribute="width" secondItem="rg4-O3-sJr" secondAttribute="width" id="d1t-vE-Z67"/>
                                 <constraint firstItem="15a-Ct-VE4" firstAttribute="leading" secondItem="rg4-O3-sJr" secondAttribute="trailing" constant="8" id="ddB-2p-7KC"/>
                                 <constraint firstAttribute="bottom" secondItem="rg4-O3-sJr" secondAttribute="bottom" id="oE8-zv-NfH"/>
                             </constraints>
@@ -110,12 +121,21 @@
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="neU-WL-pST">
                             <rect key="frame" x="8" y="188" width="398" height="630"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="2tb-AY-AWV"/>
+                                <outlet property="delegate" destination="-1" id="Wq5-HY-ZlY"/>
+                            </connections>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F31-Im-Ze1">
                             <rect key="frame" x="8" y="968" width="398" height="250"/>
                             <subviews>
                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yLW-7Q-8bN">
                                     <rect key="frame" x="0.0" y="0.0" width="398" height="250"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="HTb-Th-wGW"/>
+                                        <outlet property="delegate" destination="-1" id="kGD-6W-qji"/>
+                                    </connections>
                                 </pickerView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9z-3H-B68">
                                     <rect key="frame" x="332" y="0.0" width="66" height="44"/>
@@ -131,7 +151,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" systemColor="systemYellowColor"/>
                             <constraints>
                                 <constraint firstItem="yLW-7Q-8bN" firstAttribute="top" secondItem="F31-Im-Ze1" secondAttribute="top" id="4CV-k4-L6L"/>
                                 <constraint firstAttribute="trailing" secondItem="yLW-7Q-8bN" secondAttribute="trailing" id="PVZ-li-T6W"/>
@@ -173,14 +193,14 @@
     </objects>
     <resources>
         <image name="arrow-down" width="128" height="128"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -53,7 +53,7 @@ extension NetworkService:  NetworkServiceProtocol {
                 }
                 return output.data
             }
-            .decode(type: T.self, decoder: JSONDecoder)
+            .decode(type: decodingType, decoder: JSONDecoder)
             .mapError { error in
                 // return error if json decoding fails
                 APIError.jsonConversionFailure

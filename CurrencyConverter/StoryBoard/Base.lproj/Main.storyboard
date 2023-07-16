@@ -32,6 +32,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Currency Converter" id="Ydk-js-Ibl"/>
+                    <connections>
+                        <outlet property="currencyConvertView" destination="TDL-Sg-ikP" id="nNa-gP-W9k"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
