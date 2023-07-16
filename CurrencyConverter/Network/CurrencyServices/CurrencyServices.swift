@@ -28,6 +28,7 @@ struct CurrencyServices: CurrencyServiceProtocol {
     
     func getLatestCurrencyRates(
        URLRequestBuilder: URLRequestBuilder
+       
     ) -> AnyPublisher<CurrencyModel, APIError> {
         
         if !NetworkManager.isNetworkAvailable {
