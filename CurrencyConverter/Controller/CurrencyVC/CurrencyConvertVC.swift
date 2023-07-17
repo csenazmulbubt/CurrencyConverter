@@ -20,29 +20,27 @@ class CurrencyConvertVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpResult()
+        self.setppCurrencyConvertResultBinding()
         self.currencyConvertView.delegate = self
-        self.currencyConvertViewModel.fetchLatestCurrencyRate(URLRequestBuilder: self.getRequestBuilder(), baseCurrency: "BDT", amount: 0)
+        self.currencyConvertViewModel.fetchLatestCurrencyRate(URLRequestBuilder: self.getRequestBuilder(), baseCurrency: "USD", amount: 0.0)
     }
     
-    private func setUpResult() -> Void {
-        self.currencyConvertViewModel.$status.sink { completion in
+    private func setppCurrencyConvertResultBinding() -> Void {
+        self.currencyConvertViewModel
+            .$status
+            .sink {  [weak self] status in
+            guard let self = self else { return }
             
-        } receiveValue: { status in
             switch status {
             case .loading(_):
                 break
             case .success(let currencyConvertModelArray):
-                //
                 self.currencyConvertView.reloadCurrencyResult(currencyConvertModelArray)
-                print("CuurencyConv",currencyConvertModelArray.count)
             case .failure(let message):
                 print("Errror",message)
             }
         }.store(in: &cancellables)
-        
     }
-    
     
     private func getRequestBuilder() -> URLRequestBuilder {
         let query = ["app_id": "83dd119769df4f25b57515e894149776",

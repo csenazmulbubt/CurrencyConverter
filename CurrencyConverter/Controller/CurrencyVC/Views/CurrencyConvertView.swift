@@ -24,13 +24,15 @@ class CurrencyConvertView: UIView {
     @IBOutlet weak var currencyInfoTableView: UITableView!
     
     weak var delegate: CurrencConvertViewDelegate? = nil
-    public var selectedBaseCurrency = "USD"
     static let nibName = "CurrencyConvertView"
+    
     private var isShowPicker: Bool = false
     private let cellHeight: CGFloat = 90.0
     private var selectedAmount: Double = 0.0
     private let debounce = Debounce(timeInterval: 0.3, queue: .global(qos: .userInitiated))
     private var currencyConvertModelArray: [CurrencyConvertModel] = []
+   
+    public var selectedBaseCurrency = "USD"
     
     override init(frame: CGRect) {
         super.init(frame: frame)

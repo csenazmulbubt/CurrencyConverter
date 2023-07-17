@@ -33,8 +33,8 @@ class CurrencyConvertViewModel {
         
         self.currencyServices.getLatestCurrencyRates(
             URLRequestBuilder: URLRequestBuilder
-        ).sink { complettion in
-            switch complettion {
+        ).sink { completion in
+            switch completion {
             case .failure(let message):
                 self.status = .failure(message.localizedDescription)
             case .finished:
