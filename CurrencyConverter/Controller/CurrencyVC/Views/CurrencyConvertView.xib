@@ -46,7 +46,7 @@
                                     <rect key="frame" x="0.0" y="60" width="398" height="60"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gxs-JE-4Yg">
-                                            <rect key="frame" x="8" y="0.0" width="382" height="60"/>
+                                            <rect key="frame" x="16" y="0.0" width="366" height="60"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
@@ -55,8 +55,8 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="gxs-JE-4Yg" secondAttribute="trailing" constant="8" id="1Ii-Kw-GTX"/>
-                                        <constraint firstItem="gxs-JE-4Yg" firstAttribute="leading" secondItem="QcR-pm-6Nd" secondAttribute="leading" constant="8" id="CaE-DP-NCc"/>
+                                        <constraint firstAttribute="trailing" secondItem="gxs-JE-4Yg" secondAttribute="trailing" constant="16" id="1Ii-Kw-GTX"/>
+                                        <constraint firstItem="gxs-JE-4Yg" firstAttribute="leading" secondItem="QcR-pm-6Nd" secondAttribute="leading" constant="16" id="CaE-DP-NCc"/>
                                         <constraint firstAttribute="bottom" secondItem="gxs-JE-4Yg" secondAttribute="bottom" id="KKi-H7-5fE"/>
                                         <constraint firstAttribute="height" constant="60" id="ZM6-VW-5rg"/>
                                         <constraint firstItem="gxs-JE-4Yg" firstAttribute="top" secondItem="QcR-pm-6Nd" secondAttribute="top" id="kbh-sE-DdG"/>

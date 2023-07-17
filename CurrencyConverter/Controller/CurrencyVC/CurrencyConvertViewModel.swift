@@ -19,10 +19,34 @@ class CurrencyConvertViewModel {
     private let currencyServices: CurrencyServiceProtocol
     private var cancellables = Set<AnyCancellable>()
     private var currencyConvertModelArray: [CurrencyConvertModel] = []
+    private var currencyList: [String: String] = [:]
+    public var currencyListKeySorted: [String] = []
     @Published var status: ResoponseStatus<[CurrencyConvertModel]> = .loading("Loading")
+    @Published var currencyListStatus: ResoponseStatus<[String :String]> = .loading("Loading")
     
     init(_ currencyServices: CurrencyServiceProtocol) {
         self.currencyServices = currencyServices
+    }
+    
+    public func fetchCurrenciesList(URLRequestBuilder: URLRequestBuilder) -> Void {
+        self.currencyServices.getCurrenciesList(
+            URLRequestBuilder: URLRequestBuilder
+        ).sink { completion in
+            switch completion {
+            case .failure(let message):
+                self.status = .failure(message.localizedDescription)
+            case .finished:
+                debugPrint("Finished")
+            }
+        } receiveValue: { [weak self] result in
+            guard let self = self else {
+                self?.status = .failure("Something went wrong")
+                return
+            }
+            self.currencyList = result
+            self.currencyListKeySorted = result.keys.sorted(by: < )
+            self.currencyListStatus = .success(result)
+        }.store(in: &cancellables)
     }
     
     public func fetchLatestCurrencyRate(
@@ -55,6 +79,7 @@ class CurrencyConvertViewModel {
                      currencyModel: result
                  )
              })
+            print("Model",result.rates)
             self.status = .success(self.currencyConvertModelArray)
            
         }.store(in: &cancellables)
@@ -82,12 +107,19 @@ class CurrencyConvertViewModel {
            
         }
         let currencyModel = CurrencyConvertModel (
-            from: from,
-            to: to,
+            from: self.getFullFormOfCurrency(key: from),
+            to: self.getFullFormOfCurrency(key: to),
             rate: toRate.roundToDecimal(3),
             result: value.roundToDecimal(3)
         )
         self.currencyConvertModelArray.append(currencyModel)
         return value
+    }
+    
+    private func getFullFormOfCurrency(key: String) -> String {
+        if let value = self.currencyList[key] {
+            return value + "(\(key))"
+        }
+        return key
     }
 }

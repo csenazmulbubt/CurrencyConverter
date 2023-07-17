@@ -9,6 +9,7 @@ import Foundation
 
 public enum OpenExchangeRequestPath {
     case latest
+    case currencies
 
     fileprivate var basePath: String {
         return "/api"
@@ -22,6 +23,8 @@ public enum OpenExchangeRequestPath {
         switch self {
         case .latest:
             return "/latest.json"
+        case .currencies:
+            return "/currencies.json"
         }
     }
 }

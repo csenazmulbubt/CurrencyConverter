@@ -20,12 +20,13 @@ class CurrencyConvertVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setppCurrencyConvertResultBinding()
+        self.setupCurrencyConvertResultBinding()
+        self.setupCurrencyListResultBinding()
         self.currencyConvertView.delegate = self
-        self.currencyConvertViewModel.fetchLatestCurrencyRate(URLRequestBuilder: self.getRequestBuilder(), baseCurrency: "USD", amount: 0.0)
+        self.currencyConvertViewModel.fetchCurrenciesList(URLRequestBuilder: self.getRequestBuilder(path: OpenExchangeRequestPath.currencies.path))
     }
     
-    private func setppCurrencyConvertResultBinding() -> Void {
+    private func setupCurrencyConvertResultBinding() -> Void {
         self.currencyConvertViewModel
             .$status
             .sink {  [weak self] status in
@@ -41,14 +42,30 @@ class CurrencyConvertVC: UIViewController {
         }.store(in: &cancellables)
     }
     
-    private func getRequestBuilder() -> URLRequestBuilder {
-        let query = ["app_id": Constants.appIDForOpenExchangeRates,
-                     "base": "USD"]
+    private func setupCurrencyListResultBinding() -> Void {
+        self.currencyConvertViewModel.$currencyListStatus.sink { [weak self] status in
+            guard let self = self else { return }
+            switch status {
+            case .loading(_):
+                break
+            case .success(let currencyList):
+                self.currencyConvertView.currencyList = currencyList
+                self.currencyConvertView.currencyListKeySorted = self.currencyConvertViewModel.currencyListKeySorted
+            case .failure(let message):
+                self.currencyConvertView.showErrorMessage(message: message)
+            }
+        }.store(in: &cancellables)
+    }
+    
+    private func getRequestBuilder(
+        query: [String: String] = [:],
+        path: String
+    ) -> URLRequestBuilder {
         let URLRequestBuilder = URLRequestBuilder(
             httpMethod: .get,
             host: .openExchangeRates,
             scheme: .https,
-            endPath: OpenExchangeRequestPath.latest.path,
+            endPath: path,
             queryParams: query
         )
         return URLRequestBuilder
@@ -58,9 +75,13 @@ class CurrencyConvertVC: UIViewController {
 //MARK: - CurrencConvertViewDelegate
 extension CurrencyConvertVC: CurrencConvertViewDelegate {
     func didReciveConvertAmount(_ amount: Double) {
-        
+        let query = ["app_id": Constants.appIDForOpenExchangeRates,
+                     "base": "USD"]
         self.currencyConvertViewModel.fetchLatestCurrencyRate(
-            URLRequestBuilder: self.getRequestBuilder(),
+            URLRequestBuilder: self.getRequestBuilder(
+                query: query,
+                path: OpenExchangeRequestPath.latest.path
+            ),
             baseCurrency: currencyConvertView.selectedBaseCurrency,
             amount: amount
         )

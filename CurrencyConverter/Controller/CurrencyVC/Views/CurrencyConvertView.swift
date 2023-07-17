@@ -28,12 +28,20 @@ class CurrencyConvertView: UIView {
     static let nibName = "CurrencyConvertView"
     
     private var isShowPicker: Bool = false
-    private let cellHeight: CGFloat = 90.0
+    private let cellHeight: CGFloat = 120.0
     private var selectedAmount: Double = 0.0
     private let debounce = Debounce(timeInterval: 0.3, queue: .global(qos: .userInitiated))
     private var currencyConvertModelArray: [CurrencyConvertModel] = []
-   
+    public var currencyList = [String : String]()
+    
+    
     public var selectedBaseCurrency = "USD"
+    
+    public var currencyListKeySorted = [String]() {
+        didSet {
+            self.reloadCurrencyList()
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -108,7 +116,7 @@ class CurrencyConvertView: UIView {
         )
         self.currencyInfoTableView.contentInset = UIEdgeInsets(top: 12,
                                                                left: 0,
-                                                               bottom: 20,
+                                                               bottom: 50,
                                                                right: 0)
     }
     
@@ -117,9 +125,14 @@ class CurrencyConvertView: UIView {
         self.errorMessageLabel.isHidden = true
         self.currencyConvertModelArray = convertedArray
         self.currencyInfoTableView.reloadData()
-        self.currencyPickerView.reloadAllComponents()
+    }
+    
+    private func reloadCurrencyList() -> Void {
         self.activityIndicatiorView.stopAnimating()
-        if let index = self.currencyConvertModelArray.firstIndex(where: { $0.to == self.selectedBaseCurrency }) {
+        self.currencyPickerView.reloadAllComponents()
+        if let index = self.currencyListKeySorted.firstIndex (
+            of: self.selectedBaseCurrency
+        ) {
             self.currencyPickerView.selectRow(index, inComponent: 0, animated: true)
         }
     }
@@ -180,7 +193,7 @@ extension CurrencyConvertView: UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
-        return currencyConvertModelArray.count
+        return self.currencyListKeySorted.count
     }
 }
 
@@ -188,17 +201,20 @@ extension CurrencyConvertView: UIPickerViewDataSource {
 extension CurrencyConvertView: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        
+        var title = currencyListKeySorted[row]
+        if let value = self.currencyList[title] {
+            title = value + "(\(title))"
+        }
         let myTitle = NSAttributedString (
-            string: self.currencyConvertModelArray[row].to,
+            string: title,
             attributes:[NSAttributedString.Key.foregroundColor: UIColor.black]
         )
         return myTitle
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.selectedBaseCurrency = self.currencyConvertModelArray[row].to
-        self.selectCurrencyLabel.text = self.currencyConvertModelArray[row].to
+        self.selectedBaseCurrency =  currencyListKeySorted[row]
+        self.selectCurrencyLabel.text =  currencyListKeySorted[row]
         self.callForConvertCurrency()
     }
 }
