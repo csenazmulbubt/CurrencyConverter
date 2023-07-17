@@ -126,6 +126,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		000CE99B2A65C5C700C7AD88 /* Debounce */ = {
+			isa = PBXGroup;
+			children = (
+				000CE9992A65A30300C7AD88 /* Debounce.swift */,
+			);
+			path = Debounce;
+			sourceTree = "<group>";
+		};
 		004490562A640A5700A78864 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,7 +358,7 @@
 		00DF844B2A61A22A0055AEE8 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				000CE9992A65A30300C7AD88 /* Debounce.swift */,
+				000CE99B2A65C5C700C7AD88 /* Debounce */,
 				0044905B2A64107200A78864 /* UserDefaultManager */,
 				004490562A640A5700A78864 /* Constants */,
 				00DF844E2A61B6690055AEE8 /* CodeableFiles */,
