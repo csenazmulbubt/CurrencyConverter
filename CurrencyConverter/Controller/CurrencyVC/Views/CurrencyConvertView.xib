@@ -118,12 +118,12 @@
                                 <constraint firstAttribute="bottom" secondItem="rg4-O3-sJr" secondAttribute="bottom" id="oE8-zv-NfH"/>
                             </constraints>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="neU-WL-pST">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="onDrag" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="neU-WL-pST">
                             <rect key="frame" x="8" y="188" width="398" height="630"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <outlet property="dataSource" destination="-1" id="2tb-AY-AWV"/>
-                                <outlet property="delegate" destination="-1" id="Wq5-HY-ZlY"/>
+                                <outlet property="dataSource" destination="-1" id="1KS-te-JRU"/>
+                                <outlet property="delegate" destination="-1" id="9c8-wr-IAP"/>
                             </connections>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F31-Im-Ze1">
@@ -133,8 +133,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="398" height="250"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <connections>
-                                        <outlet property="dataSource" destination="-1" id="HTb-Th-wGW"/>
-                                        <outlet property="delegate" destination="-1" id="kGD-6W-qji"/>
+                                        <outlet property="dataSource" destination="-1" id="0Dw-US-Uoq"/>
+                                        <outlet property="delegate" destination="-1" id="uKg-dy-1YL"/>
                                     </connections>
                                 </pickerView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9z-3H-B68">

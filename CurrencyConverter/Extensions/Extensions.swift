@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Combine
 
 extension UIView {
     
@@ -59,4 +60,22 @@ extension Double {
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: date)
     }
+    
+    func roundToDecimal(_ fractionDigits: Int) -> Double {
+        let multiplier = pow(10, Double(fractionDigits))
+        return Darwin.round(self * multiplier) / multiplier
+    }
 }
+
+extension Publisher {
+    func flatMapLatest<P: Publisher>(_ transform: @escaping (Output) -> P) -> Publishers.SwitchToLatest<P, Publishers.Map<Self, P>> {
+        map(transform).switchToLatest()
+    }
+}
+
+extension String {
+    func toDouble() -> Double? {
+        return NumberFormatter().number(from: self)?.doubleValue
+    }
+}
+

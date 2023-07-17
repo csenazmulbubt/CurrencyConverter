@@ -8,8 +8,12 @@
 import UIKit
 import Foundation
 
-class CurrencyConvertView: UIView {
+protocol CurrencConvertViewDelegate: AnyObject {
+    func didReciveConvertAmount(_ amount: Double)
+}
 
+class CurrencyConvertView: UIView {
+    
     @IBOutlet weak var currencyInputContainerView: UIView!
     @IBOutlet weak var currencyInputTextField: UITextField!
     @IBOutlet weak var selectCurrencyCV: UIView!
@@ -19,13 +23,14 @@ class CurrencyConvertView: UIView {
     @IBOutlet weak var activityIndicatiorView: UIActivityIndicatorView!
     @IBOutlet weak var currencyInfoTableView: UITableView!
     
-   
+    weak var delegate: CurrencConvertViewDelegate? = nil
+    public var selectedBaseCurrency = "USD"
     static let nibName = "CurrencyConvertView"
-    @Published var tappedOnListCurrencyButton: Bool = false
     private var isShowPicker: Bool = false
-    private var productArray = ["USD","BDT","YYY","ZD"]
     private let cellHeight: CGFloat = 90.0
-   
+    private var selectedAmount: Double = 0.0
+    private let debounce = Debounce(timeInterval: 0.3, queue: .global(qos: .userInitiated))
+    private var currencyConvertModelArray: [CurrencyConvertModel] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,6 +52,7 @@ class CurrencyConvertView: UIView {
     }
     
     private func initialSetup() -> Void {
+        self.currencyInputTextField.delegate = self
         self.currencyInputContainerView.layer.cornerRadius = 6
         self.selectCurrencyCV.layer.cornerRadius = 6
         let tap = UITapGestureRecognizer(
@@ -99,7 +105,31 @@ class CurrencyConvertView: UIView {
                                                                left: 0,
                                                                bottom: 20,
                                                                right: 0)
-
+    }
+    
+    func reloadCurrencyResult(_ convertedArray: [CurrencyConvertModel]) -> Void {
+        DispatchQueue.main.async {
+            self.currencyConvertModelArray = convertedArray
+            self.currencyInfoTableView.reloadData()
+            self.currencyPickerView.reloadAllComponents()
+            self.activityIndicatiorView.stopAnimating()
+            if let index = self.currencyConvertModelArray.firstIndex(where: { $0.to == self.selectedBaseCurrency }) {
+                self.currencyPickerView.selectRow(index, inComponent: 0, animated: true)
+            }
+        }
+    }
+    
+    private func callForConvertCurrency() -> Void {
+        debounce.dispatch { [weak self] in
+            guard let self = self else { return }
+            var amount: Double = 0.0
+            DispatchQueue.main.async {
+                if let amt = self.currencyInputTextField.text?.toDouble() {
+                    amount = amt
+                }
+                self.delegate?.didReciveConvertAmount(amount)
+            }
+        }
     }
 }
 
@@ -125,7 +155,7 @@ extension CurrencyConvertView {
         self.isShowPicker = false
         self.showHidePickerView(isShow: isShowPicker)
     }
-
+    
     @objc func keyboardWillHide(notification: NSNotification) {
         
     }
@@ -139,24 +169,26 @@ extension CurrencyConvertView: UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
-        return productArray.count
+        return currencyConvertModelArray.count
     }
 }
 
-//MARK: - CurrencyConvertView
+//MARK: - UIPickerViewDelegate
 extension CurrencyConvertView: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-
+        
         let myTitle = NSAttributedString (
-            string: self.productArray[row],
+            string: self.currencyConvertModelArray[row].to,
             attributes:[NSAttributedString.Key.foregroundColor: UIColor.black]
         )
         return myTitle
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.selectCurrencyLabel.text = self.productArray[row]
+        self.selectedBaseCurrency = self.currencyConvertModelArray[row].to
+        self.selectCurrencyLabel.text = self.currencyConvertModelArray[row].to
+        self.callForConvertCurrency()
     }
 }
 
@@ -165,8 +197,8 @@ extension CurrencyConvertView: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-      
-       return 200
+        
+        return currencyConvertModelArray.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -176,6 +208,13 @@ extension CurrencyConvertView: UITableViewDataSource, UITableViewDelegate{
             withIdentifier: CurrencyTableViewCell.cellIdentifier,
             for: indexPath
         ) as? CurrencyTableViewCell else { return UITableViewCell() }
+        
+        cell.setValue(
+            from: currencyConvertModelArray[indexPath.item].from,
+            to:currencyConvertModelArray[indexPath.item].to ,
+            rate: currencyConvertModelArray[indexPath.item].rate,
+            result: currencyConvertModelArray[indexPath.item].result
+        )
         return cell
     }
     
@@ -189,5 +228,24 @@ extension CurrencyConvertView: UITableViewDataSource, UITableViewDelegate{
                    willDisplay cell: UITableViewCell,
                    forRowAt indexPath: IndexPath) {
         
+    }
+}
+
+//MARK: - UITextFieldDelegate
+extension CurrencyConvertView: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {    //delegate method
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        self.callForConvertCurrency()
+        return true
+    }
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {  //delegate method
+        return false
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
+        textField.resignFirstResponder()
+        return true
     }
 }

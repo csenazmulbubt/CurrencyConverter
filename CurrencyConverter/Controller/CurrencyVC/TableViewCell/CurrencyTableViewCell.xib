@@ -165,7 +165,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="fromCurrencyLabelValue" destination="pE4-T3-Zx9" id="rk9-1a-qHN"/>
-                <outlet property="rateLabelValue" destination="5TO-2R-cOi" id="G83-2Z-gHr"/>
+                <outlet property="rateLabelValue" destination="VRq-Mr-1rp" id="WtN-HV-9Ou"/>
                 <outlet property="resultLabelValue" destination="zTj-OZ-gNG" id="n5S-Be-gWr"/>
                 <outlet property="toCurrencyLabelValue" destination="tZv-v7-Lgy" id="lpz-dI-fDx"/>
             </connections>

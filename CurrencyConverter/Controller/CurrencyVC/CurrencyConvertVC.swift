@@ -8,29 +8,45 @@
 import UIKit
 import Combine
 
-struct User: Codable {
-    let name: String
-    let age: String
-    let fatherName: String
-}
 
 class CurrencyConvertVC: UIViewController {
     
     @IBOutlet weak var currencyConvertView: CurrencyConvertView!
    
-    let model = CurrencyConvertViewModel(CurrencyServices(NetworkService()))
+    private var cancellables = Set<AnyCancellable>()
+    private let currencyConvertViewModel = CurrencyConvertViewModel(
+        CurrencyServices(NetworkService())
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        print("Date",(Double(1689501601).dateFormatted)?.intervalSince(isMoreThan: 30))
-        _ = currencyConvertView.$tappedOnListCurrencyButton.sink { [weak self] isTapped in
-            if isTapped {
-                print("Tapped On Currency Button")
+        setUpResult()
+        self.currencyConvertView.delegate = self
+        self.currencyConvertViewModel.fetchLatestCurrencyRate(URLRequestBuilder: self.getRequestBuilder(), baseCurrency: "BDT", amount: 0)
+    }
+    
+    private func setUpResult() -> Void {
+        self.currencyConvertViewModel.$status.sink { completion in
+            
+        } receiveValue: { status in
+            switch status {
+            case .loading(_):
+                break
+            case .success(let currencyConvertModelArray):
+                //
+                self.currencyConvertView.reloadCurrencyResult(currencyConvertModelArray)
+                print("CuurencyConv",currencyConvertModelArray.count)
+            case .failure(let message):
+                print("Errror",message)
             }
-        }
-      
-        let query = ["app_id": "83dd119769df4f25b57515e894149776"]
+        }.store(in: &cancellables)
+        
+    }
+    
+    
+    private func getRequestBuilder() -> URLRequestBuilder {
+        let query = ["app_id": "83dd119769df4f25b57515e894149776",
+                     "base": "USD"]
         let URLRequestBuilder = URLRequestBuilder(
             httpMethod: .get,
             host: .openExchangeRates,
@@ -38,10 +54,17 @@ class CurrencyConvertVC: UIViewController {
             endPath: OpenExchangeRequestPath.latest.path,
             queryParams: query
         )
-       // DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            
-            self.model.fetchLatestCurrencyRate(URLRequestBuilder: URLRequestBuilder)
-        //})
+        return URLRequestBuilder
     }
 }
 
+//MARK: - CurrencConvertViewDelegate
+extension CurrencyConvertVC: CurrencConvertViewDelegate {
+    func didReciveConvertAmount(_ amount: Double) {
+        self.currencyConvertViewModel.fetchLatestCurrencyRate(
+            URLRequestBuilder: self.getRequestBuilder(),
+            baseCurrency: currencyConvertView.selectedBaseCurrency,
+            amount: amount
+        )
+    }
+}

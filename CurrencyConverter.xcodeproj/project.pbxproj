@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000CE99A2A65A30300C7AD88 /* Debounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000CE9992A65A30300C7AD88 /* Debounce.swift */; };
 		004490582A640B4200A78864 /* CurrencyConvertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004490572A640B4200A78864 /* CurrencyConvertModel.swift */; };
 		0044905A2A640FBF00A78864 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004490592A640FBF00A78864 /* Constants.swift */; };
 		0044905D2A6410E000A78864 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0044905C2A6410E000A78864 /* UserDefaultManager.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		000CE9992A65A30300C7AD88 /* Debounce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
 		004490572A640B4200A78864 /* CurrencyConvertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConvertModel.swift; sourceTree = "<group>"; };
 		004490592A640FBF00A78864 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0044905C2A6410E000A78864 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 		00DF844B2A61A22A0055AEE8 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				000CE9992A65A30300C7AD88 /* Debounce.swift */,
 				0044905B2A64107200A78864 /* UserDefaultManager */,
 				004490562A640A5700A78864 /* Constants */,
 				00DF844E2A61B6690055AEE8 /* CodeableFiles */,
@@ -536,6 +539,7 @@
 				0046762B2A63348A00D46FE7 /* CurrencyConvertView.swift in Sources */,
 				00DF84172A61A1890055AEE8 /* SceneDelegate.swift in Sources */,
 				004675FF2A6308E900D46FE7 /* NetworkService.swift in Sources */,
+				000CE99A2A65A30300C7AD88 /* Debounce.swift in Sources */,
 				0044905F2A64115900A78864 /* CurrencyConvertViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

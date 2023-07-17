@@ -44,6 +44,7 @@ extension NetworkService:  NetworkServiceProtocol {
         
         return URLSession.shared
             .dataTaskPublisher(for: urlRequest)
+            .receive(on: DispatchQueue.main)
             .tryMap { output in
                 guard let response = output.response as? HTTPURLResponse else {
                     throw APIError.responseUnsuccessful
