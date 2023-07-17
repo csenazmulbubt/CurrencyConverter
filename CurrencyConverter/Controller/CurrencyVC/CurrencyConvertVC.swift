@@ -30,20 +30,19 @@ class CurrencyConvertVC: UIViewController {
             .$status
             .sink {  [weak self] status in
             guard let self = self else { return }
-            
             switch status {
             case .loading(_):
                 break
             case .success(let currencyConvertModelArray):
                 self.currencyConvertView.reloadCurrencyResult(currencyConvertModelArray)
             case .failure(let message):
-                print("Errror",message)
+                self.currencyConvertView.showErrorMessage(message: message)
             }
         }.store(in: &cancellables)
     }
     
     private func getRequestBuilder() -> URLRequestBuilder {
-        let query = ["app_id": "83dd119769df4f25b57515e894149776",
+        let query = ["app_id": Constants.appIDForOpenExchangeRates,
                      "base": "USD"]
         let URLRequestBuilder = URLRequestBuilder(
             httpMethod: .get,
@@ -59,6 +58,7 @@ class CurrencyConvertVC: UIViewController {
 //MARK: - CurrencConvertViewDelegate
 extension CurrencyConvertVC: CurrencConvertViewDelegate {
     func didReciveConvertAmount(_ amount: Double) {
+        
         self.currencyConvertViewModel.fetchLatestCurrencyRate(
             URLRequestBuilder: self.getRequestBuilder(),
             baseCurrency: currencyConvertView.selectedBaseCurrency,

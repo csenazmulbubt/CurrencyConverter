@@ -17,6 +17,7 @@
                 <outlet property="currencyInputTextField" destination="gxs-JE-4Yg" id="DHw-L8-DbI"/>
                 <outlet property="currencyPickerView" destination="yLW-7Q-8bN" id="yNS-wc-963"/>
                 <outlet property="currencyPickerViewBottomConstraint" destination="tOu-s9-yHu" id="dt9-PO-fZT"/>
+                <outlet property="errorMessageLabel" destination="0Gy-XU-Qdv" id="n6L-cN-5rJ"/>
                 <outlet property="selectCurrencyCV" destination="fZi-FS-dAd" id="W6O-4l-Aab"/>
                 <outlet property="selectCurrencyLabel" destination="rg4-O3-sJr" id="uQp-Jo-Y4m"/>
             </connections>
@@ -126,12 +127,18 @@
                                 <outlet property="delegate" destination="-1" id="9c8-wr-IAP"/>
                             </connections>
                         </tableView>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gy-XU-Qdv">
+                            <rect key="frame" x="179.5" y="394.5" width="55.5" height="29"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                            <color key="textColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F31-Im-Ze1">
                             <rect key="frame" x="8" y="968" width="398" height="250"/>
                             <subviews>
                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yLW-7Q-8bN">
                                     <rect key="frame" x="0.0" y="0.0" width="398" height="250"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-1" id="0Dw-US-Uoq"/>
                                         <outlet property="delegate" destination="-1" id="uKg-dy-1YL"/>
@@ -151,7 +158,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemYellowColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="yLW-7Q-8bN" firstAttribute="top" secondItem="F31-Im-Ze1" secondAttribute="top" id="4CV-k4-L6L"/>
                                 <constraint firstAttribute="trailing" secondItem="yLW-7Q-8bN" secondAttribute="trailing" id="PVZ-li-T6W"/>
@@ -170,8 +177,10 @@
                         <constraint firstItem="iuh-MJ-UQG" firstAttribute="leading" secondItem="Tm7-oo-GKC" secondAttribute="leading" constant="8" id="CZF-Do-quq"/>
                         <constraint firstItem="neU-WL-pST" firstAttribute="top" secondItem="fZi-FS-dAd" secondAttribute="bottom" constant="16" id="IK8-x7-tkD"/>
                         <constraint firstAttribute="trailing" secondItem="iuh-MJ-UQG" secondAttribute="trailing" constant="8" id="Qco-BB-fsT"/>
+                        <constraint firstItem="0Gy-XU-Qdv" firstAttribute="centerY" secondItem="Tm7-oo-GKC" secondAttribute="centerY" id="RDE-NQ-pqM"/>
                         <constraint firstItem="F31-Im-Ze1" firstAttribute="leading" secondItem="Tm7-oo-GKC" secondAttribute="leading" constant="8" id="RYm-wL-0an"/>
                         <constraint firstAttribute="trailing" secondItem="neU-WL-pST" secondAttribute="trailing" constant="8" id="dsN-i7-j33"/>
+                        <constraint firstItem="0Gy-XU-Qdv" firstAttribute="centerX" secondItem="Tm7-oo-GKC" secondAttribute="centerX" id="eBF-WP-CQM"/>
                         <constraint firstAttribute="bottom" secondItem="neU-WL-pST" secondAttribute="bottom" id="jEb-jg-UuF"/>
                         <constraint firstItem="fZi-FS-dAd" firstAttribute="top" secondItem="iuh-MJ-UQG" secondAttribute="bottom" constant="8" id="mgv-3S-L8Q"/>
                         <constraint firstAttribute="bottom" secondItem="F31-Im-Ze1" secondAttribute="bottom" constant="-400" id="tOu-s9-yHu"/>
@@ -198,9 +207,6 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

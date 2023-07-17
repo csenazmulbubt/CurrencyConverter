@@ -22,6 +22,7 @@ class CurrencyConvertView: UIView {
     @IBOutlet weak var currencyPickerViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicatiorView: UIActivityIndicatorView!
     @IBOutlet weak var currencyInfoTableView: UITableView!
+    @IBOutlet weak var errorMessageLabel: UILabel!
     
     weak var delegate: CurrencConvertViewDelegate? = nil
     static let nibName = "CurrencyConvertView"
@@ -63,6 +64,8 @@ class CurrencyConvertView: UIView {
         )
         self.addGestureRecognizer(tap)
         self.registerKeyboardNotification()
+        self.currencyInfoTableView.layer.cornerRadius = 6
+        self.currencyPickerView.layer.cornerRadius = 6
         self.setupTableView()
     }
     
@@ -110,14 +113,14 @@ class CurrencyConvertView: UIView {
     }
     
     func reloadCurrencyResult(_ convertedArray: [CurrencyConvertModel]) -> Void {
-        DispatchQueue.main.async {
-            self.currencyConvertModelArray = convertedArray
-            self.currencyInfoTableView.reloadData()
-            self.currencyPickerView.reloadAllComponents()
-            self.activityIndicatiorView.stopAnimating()
-            if let index = self.currencyConvertModelArray.firstIndex(where: { $0.to == self.selectedBaseCurrency }) {
-                self.currencyPickerView.selectRow(index, inComponent: 0, animated: true)
-            }
+        self.currencyInfoTableView.isHidden = false
+        self.errorMessageLabel.isHidden = true
+        self.currencyConvertModelArray = convertedArray
+        self.currencyInfoTableView.reloadData()
+        self.currencyPickerView.reloadAllComponents()
+        self.activityIndicatiorView.stopAnimating()
+        if let index = self.currencyConvertModelArray.firstIndex(where: { $0.to == self.selectedBaseCurrency }) {
+            self.currencyPickerView.selectRow(index, inComponent: 0, animated: true)
         }
     }
     
@@ -132,6 +135,12 @@ class CurrencyConvertView: UIView {
                 self.delegate?.didReciveConvertAmount(amount)
             }
         }
+    }
+    
+    func showErrorMessage(message: String) -> Void {
+        self.currencyInfoTableView.isHidden = true
+        self.errorMessageLabel.isHidden = false
+        self.errorMessageLabel.text = message
     }
 }
 
