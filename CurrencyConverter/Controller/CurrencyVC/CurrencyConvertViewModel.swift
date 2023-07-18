@@ -79,7 +79,6 @@ class CurrencyConvertViewModel {
                      currencyModel: result
                  )
              })
-            print("Model",result.rates)
             self.status = .success(self.currencyConvertModelArray)
            
         }.store(in: &cancellables)
@@ -104,8 +103,8 @@ class CurrencyConvertViewModel {
         
         if from != currencyModel.base {
             toRate = (toRate / fromRate)
-           
         }
+        
         let currencyModel = CurrencyConvertModel (
             from: self.getFullFormOfCurrency(key: from),
             to: self.getFullFormOfCurrency(key: to),

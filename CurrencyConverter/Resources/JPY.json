@@ -1,0 +1,15 @@
+{
+  "license" : "https:\/\/openexchangerates.org\/license",
+  "timestamp" : 1689534000,
+  "disclaimer" : "Usage subject to terms: https:\/\/openexchangerates.org\/terms",
+  "base" : "JPY",
+  "rates" : {
+    "BDT" : 0.79,
+    "USD" : 0.0072,
+    "INR" : 0.59,
+    "EUR" : 0.0064,
+    "NZD" : 0.011,
+    "JPY" : 1.0,
+    "AUD" : 0.011
+  }
+}

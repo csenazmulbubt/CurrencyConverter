@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CurrencyConvertModel {
+struct CurrencyConvertModel: Equatable {
     let from: String
     let to: String
     let rate: Double
