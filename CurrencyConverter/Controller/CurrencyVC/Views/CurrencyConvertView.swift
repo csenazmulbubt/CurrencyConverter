@@ -130,11 +130,6 @@ class CurrencyConvertView: UIView {
     private func reloadCurrencyList() -> Void {
         self.activityIndicatiorView.stopAnimating()
         self.currencyPickerView.reloadAllComponents()
-        if let index = self.currencyListKeySorted.firstIndex (
-            of: self.selectedBaseCurrency
-        ) {
-            self.currencyPickerView.selectRow(index, inComponent: 0, animated: true)
-        }
     }
     
     private func callForConvertCurrency() -> Void {
